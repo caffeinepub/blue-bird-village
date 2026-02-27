@@ -1,14 +1,13 @@
 # Specification
 
 ## Summary
-**Goal:** Build a 3D Minecraft-inspired village game with a controllable blue bird character using React Three Fiber.
+**Goal:** Improve the visual prominence and visibility of all interactive buttons in the Blue Bird Village game UI to make them clearly legible and easier to interact with.
 
 **Planned changes:**
-- Render a 3D voxel-style village scene with blocky terrain (grass, dirt, stone blocks), at least 3 cubic houses with roofs, trees (cube leaves + cube trunks), a sky background, and a sun
-- Add a blue blocky bird player character built from basic box geometries (body, wings, beak) colored bright blue
-- Implement WASD/arrow key movement and Space to jump for the bird, with basic gravity keeping it on terrain
-- Add a third-person camera that smoothly follows behind and above the bird as it moves
-- Display a HUD overlay showing real-time X/Y/Z position, control hints (WASD/Arrows to move, Space to jump), and a mute/unmute button for background music
-- Apply a Minecraft-inspired pixel-art UI theme using "Press Start 2P" font, earthy/grassy color palette, and blocky flat UI style for all overlays and buttons
+- Update the mute/unmute button in `GameHUD.tsx` with a distinct border, background color, and sufficient padding
+- Enhance the yellow (jump), green (music), and pink (hints) action buttons in `TouchControls.tsx` with stronger contrast and clearly distinguishable icons
+- Update `BlockHotbar.tsx` hotbar slot buttons to have visible borders, with the active slot highlighted by a bright distinct border
+- Add hover state (brightness increase) and active/pressed state (slight scale down or darker shade) to all buttons
+- Ensure all button styles remain consistent with the Minecraft pixel-art theme (blocky, flat, Press Start 2P font)
 
-**User-visible outcome:** The user can explore a Minecraft-style 3D village as a blue blocky bird character, moving and jumping around the scene with a following camera, pixel-art HUD, and toggleable background music.
+**User-visible outcome:** All game UI buttons are clearly visible, prominently styled, and provide visual feedback on hover and press, while maintaining the existing Minecraft pixel-art aesthetic.

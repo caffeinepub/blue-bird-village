@@ -2,72 +2,13 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-create-a-minecraft-inspired-3d-voxel-style-village-scene-rendered-with-react-three-fiber-the-village-must-include-blocky-terrain-grass-dirt-and-stone-blocks-at-least-3-simple-cubic-style-houses-with-roofs-trees-made-of-cube-leaves-and-log-trunks-and-a-sky-background-with-a-sun",
-      "featureTitle": "Create a Minecraft-inspired 3D voxel-style village scene rendered with React Three Fiber. The village must include blocky terrain (grass, dirt, and stone blocks), at least 3 simple cubic-style houses with roofs, trees made of cube leaves and log trunks, and a sky background with a sun.",
+      "featureId": "feature-increase-the-visual-prominence-and-visibility-of-all-interactive-buttons-in-the-game-ui-including-the-mute-unmute-music-button-in-gamehud-tsx-the-touchcontrols-action-buttons-yellow-jump-green-music-pink-hints-and-the-blockhotbar-slot-buttons-buttons-must-have-clearly-legible-labels-icons-stronger-contrast-against-the-background-a-visible-border-or-raised-effect-and-a-hover-active-press-state-e-g-brightness-change-or-scale-all-styling-must-remain-consistent-with-the-existing-minecraft-pixel-art-theme-press-start-2p-font-earthy-blocky-flat-ui-stone-earthy-color-palette",
+      "featureTitle": "Increase the visual prominence and visibility of all interactive buttons in the game UI — including the mute/unmute music button in GameHUD.tsx, the TouchControls action buttons (yellow jump, green music, pink hints), and the BlockHotbar slot buttons. Buttons must have clearly legible labels/icons, stronger contrast against the background, a visible border or raised effect, and a hover/active press state (e.g., brightness change or scale). All styling must remain consistent with the existing Minecraft pixel-art theme (Press Start 2P font, earthy/blocky flat UI, stone/earthy color palette).",
       "files": [
-        "frontend/src/components/House.tsx",
-        "frontend/src/components/Sky.tsx",
-        "frontend/src/components/Terrain.tsx",
-        "frontend/src/components/Tree.tsx",
-        "frontend/src/components/Village3DScene.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-1"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-a-blue-bird-player-character-rendered-as-a-simple-blocky-voxel-3d-model-using-basic-three-js-geometry-box-for-body-smaller-boxes-for-wings-and-beak-colored-bright-blue-the-bird-must-be-controllable-by-the-player-using-arrow-keys-or-wasd-to-move-left-right-forward-and-backward-across-the-village-terrain-and-space-to-jump",
-      "featureTitle": "Add a blue bird player character rendered as a simple blocky/voxel 3D model (using basic Three.js geometry — box for body, smaller boxes for wings and beak) colored bright blue. The bird must be controllable by the player using arrow keys or WASD to move left, right, forward, and backward across the village terrain, and Space to jump.",
-      "files": [
-        "frontend/src/components/BlueBird.tsx",
-        "frontend/src/hooks/useKeyboardControls.ts"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-2"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-implement-a-third-person-camera-that-follows-the-blue-bird-character-smoothly-as-it-moves-around-the-village-the-camera-should-maintain-a-fixed-distance-and-angle-behind-and-above-the-bird-rotating-with-the-bird-s-movement-direction",
-      "featureTitle": "Implement a third-person camera that follows the blue bird character smoothly as it moves around the village. The camera should maintain a fixed distance and angle behind and above the bird, rotating with the bird's movement direction.",
-      "files": [
-        "frontend/src/components/FollowCamera.tsx",
-        "frontend/src/components/Village3DScene.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-3"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-simple-minecraft-style-ambient-village-sounds-or-background-music-toggle-mute-unmute-button-on-screen-display-a-hud-overlay-showing-the-player-s-current-position-coordinates-and-a-simple-on-screen-control-hints-label-wasd-to-move-space-to-jump",
-      "featureTitle": "Add simple Minecraft-style ambient village sounds or background music toggle (mute/unmute button on screen). Display a HUD overlay showing the player's current position coordinates and a simple on-screen control hints label (WASD to move, Space to jump).",
-      "files": [
+        "frontend/src/components/BlockHotbar.tsx",
         "frontend/src/components/GameHUD.tsx",
-        "frontend/src/components/Village3DScene.tsx",
-        "frontend/src/hooks/useAudio.ts"
+        "frontend/src/components/TouchControls.tsx",
+        "frontend/src/index.css"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -77,27 +18,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-4"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-apply-a-consistent-minecraft-inspired-pixel-art-visual-theme-across-the-entire-ui-use-a-pixelated-font-e-g-press-start-2p-from-google-fonts-earthy-and-grassy-color-palette-greens-browns-sky-blue-stone-grey-and-a-blocky-flat-ui-style-for-all-overlays-buttons-and-hud-elements",
-      "featureTitle": "Apply a consistent Minecraft-inspired pixel-art visual theme across the entire UI: use a pixelated font (e.g., 'Press Start 2P' from Google Fonts), earthy and grassy color palette (greens, browns, sky blue, stone grey), and a blocky flat UI style for all overlays, buttons, and HUD elements.",
-      "files": [
-        "frontend/src/components/GameHUD.tsx",
-        "frontend/src/index.css",
-        "frontend/tailwind.config.js"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-5"
+        "REQ-16"
       ],
       "confidence": "high"
     }

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 export interface KeyboardState {
   forward: boolean;
@@ -8,9 +8,13 @@ export interface KeyboardState {
   jump: boolean;
 }
 
-export function useKeyboardControls(): KeyboardState {
-  const keysRef = useRef<Set<string>>(new Set());
-  const [state, setState] = useState<KeyboardState>({
+/**
+ * Returns a stable ref whose `.current` always reflects the live keyboard state.
+ * Using a ref (instead of useState) means useFrame callbacks always read the
+ * latest value without stale-closure issues.
+ */
+export function useKeyboardControls(): React.RefObject<KeyboardState> {
+  const stateRef = useRef<KeyboardState>({
     forward: false,
     backward: false,
     left: false,
@@ -18,16 +22,18 @@ export function useKeyboardControls(): KeyboardState {
     jump: false,
   });
 
+  const keysRef = useRef<Set<string>>(new Set());
+
   useEffect(() => {
     const updateState = () => {
       const keys = keysRef.current;
-      setState({
+      stateRef.current = {
         forward: keys.has('KeyW') || keys.has('ArrowUp'),
         backward: keys.has('KeyS') || keys.has('ArrowDown'),
         left: keys.has('KeyA') || keys.has('ArrowLeft'),
         right: keys.has('KeyD') || keys.has('ArrowRight'),
         jump: keys.has('Space'),
-      });
+      };
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -53,5 +59,5 @@ export function useKeyboardControls(): KeyboardState {
     };
   }, []);
 
-  return state;
+  return stateRef;
 }

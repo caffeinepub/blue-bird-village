@@ -1,13 +1,14 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 3,
-  "summary": "A Minecraft-style 2D/3D game featuring a blue bird character in a village setting.",
+  "projectStateVersion": 13,
+  "summary": "A Minecraft-style 3D game featuring a blue bird character in a village setting with block placement (creative mode) and passive wandering animals (cows, pigs, chickens).",
   "architectural_notes": [
     "Minecraft-inspired visual style (blocky/voxel aesthetic)"
   ],
-  "known_issues": [],
+  "known_issues": [
+    "Bird movement controls (WASD/arrow keys/Space) not responding"
+  ],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Pixel-art style blue bird character sprite facing forward, blocky Minecraft aesthetic (blue-bird-sprite.dim_128x128.png)\n- Pixel-art Minecraft-style grass and dirt texture tile (grass-dirt-tile.dim_64x64.png)\n- Pixel-art Minecraft-style wooden plank texture tile for houses (wood-plank-tile.dim_64x64.png)\n- Pixel-art Minecraft-style stone brick texture tile (stone-brick-tile.dim_64x64.png)\n- Pixel-art Minecraft-style tree leaf texture tile, bright green (leaf-tile.dim_64x64.png)",
   "existing_features": [
     {
       "id": "feature-create-a-minecraft-inspired-3d-voxel-style-village-scene-rendered-with-react-three-fiber-the-village-must-include-blocky-terrain-grass-dirt-and-stone-blocks-at-least-3-simple-cubic-style-houses-with-roofs-trees-made-of-cube-leaves-and-log-trunks-and-a-sky-background-with-a-sun",
@@ -48,12 +49,130 @@
         "REQ-5"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-display-a-prominent-always-visible-on-screen-controls-panel-in-the-game-hud-gamehud-tsx-showing-the-player-controls-wasd-arrow-keys-to-move-space-to-jump-the-panel-must-use-the-minecraft-pixel-art-style-press-start-2p-font-earthy-blocky-flat-ui-style-matching-the-existing-hud-and-be-positioned-so-it-is-easy-to-read-at-all-times-during-gameplay",
+      "title": "Display a prominent, always-visible on-screen controls panel in the game HUD (GameHUD.tsx) showing the player controls: WASD / Arrow Keys to move, Space to jump. The panel must use the Minecraft pixel-art style (Press Start 2P font, earthy/blocky flat UI style matching the existing HUD) and be positioned so it is easy to read at all times during gameplay.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-blue-bird-character-s-movement-controls-so-that-wasd-keys-arrow-keys-and-space-bar-correctly-move-and-jump-the-bird-in-village3dscene-diagnose-and-resolve-the-input-handling-issue-in-bluebird-tsx-and-or-usekeyboardcontrols-ts-common-causes-include-the-canvas-not-receiving-keyboard-focus-event-listeners-not-being-attached-to-the-correct-dom-element-should-be-window-or-document-not-the-canvas-or-key-event-handlers-being-blocked-by-the-hud-overlay-capturing-pointer-focus-events",
+      "title": "Fix the blue bird character's movement controls so that WASD keys, arrow keys, and Space bar correctly move and jump the bird in Village3DScene. Diagnose and resolve the input handling issue in BlueBird.tsx and/or useKeyboardControls.ts — common causes include the canvas not receiving keyboard focus, event listeners not being attached to the correct DOM element (should be window or document, not the canvas), or key event handlers being blocked by the HUD overlay capturing pointer/focus events.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-new-touchcontrols-component-frontend-src-components-touchcontrols-tsx-that-renders-a-fixed-position-overlay-on-top-of-the-3d-canvas-on-the-left-side-render-a-virtual-circular-joystick-with-a-draggable-thumb-and-directional-arrows-up-down-left-right-indicators-touch-drag-interactions-on-this-joystick-must-translate-into-forward-backward-left-right-movement-inputs-for-the-blue-bird-equivalent-to-wasd-arrow-key-presses-on-the-right-side-render-three-circular-action-buttons-a-yellow-button-with-a-running-figure-icon-triggers-jump-equivalent-to-space-bar-a-green-button-with-a-music-note-icon-toggles-mute-unmute-audio-same-as-the-existing-mute-button-in-gamehud-and-a-pink-button-with-a-lightbulb-icon-toggles-the-controls-hints-panel-visibility-all-touch-interactions-must-use-pointer-touch-event-handlers-attached-to-the-overlay-elements-not-the-canvas-so-they-do-not-interfere-with-keyboard-controls",
+      "title": "Create a new TouchControls component (frontend/src/components/TouchControls.tsx) that renders a fixed-position overlay on top of the 3D canvas. On the left side, render a virtual circular joystick with a draggable thumb and directional arrows (up/down/left/right indicators) — touch/drag interactions on this joystick must translate into forward/backward/left/right movement inputs for the blue bird, equivalent to WASD/arrow key presses. On the right side, render three circular action buttons: a yellow button with a running figure icon (triggers Jump, equivalent to Space bar), a green button with a music note icon (toggles mute/unmute audio, same as the existing mute button in GameHUD), and a pink button with a lightbulb icon (toggles the controls hints panel visibility). All touch interactions must use pointer/touch event handlers attached to the overlay elements (not the canvas) so they do not interfere with keyboard controls.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-integrate-the-touchcontrols-component-into-village3dscene-tsx-so-it-is-rendered-as-a-sibling-overlay-alongside-the-existing-gamehud-pass-the-necessary-callbacks-onmove-onjump-ontogglemusic-ontogglehints-from-village3dscene-down-to-touchcontrols-wire-the-joystick-movement-output-into-the-same-movement-system-used-by-bluebird-tsx-via-a-shared-ref-or-context-so-both-keyboard-and-touch-inputs-drive-the-bird-simultaneously-wire-the-yellow-jump-button-to-trigger-the-bird-s-jump-action-wire-the-green-music-button-to-call-the-existing-togglemute-function-from-useaudio-wire-the-pink-hint-button-to-toggle-the-controls-panel-state-in-gamehud",
+      "title": "Integrate the TouchControls component into Village3DScene.tsx so it is rendered as a sibling overlay alongside the existing GameHUD. Pass the necessary callbacks (onMove, onJump, onToggleMusic, onToggleHints) from Village3DScene down to TouchControls. Wire the joystick movement output into the same movement system used by BlueBird.tsx (via a shared ref or context so both keyboard and touch inputs drive the bird simultaneously). Wire the yellow jump button to trigger the bird's jump action. Wire the green music button to call the existing toggleMute function from useAudio. Wire the pink hint button to toggle the controls panel state in GameHUD.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-style-the-touchcontrols-overlay-using-the-existing-minecraft-pixel-art-theme-press-start-2p-font-earthy-blocky-flat-ui-style-matching-index-css-design-tokens-the-joystick-outer-ring-should-be-a-dark-semi-transparent-circle-the-thumb-should-be-a-white-light-circle-with-a-blue-concentric-dot-and-arrow-indicators-the-three-action-buttons-should-be-large-circular-and-colored-yellow-green-and-pink-respectively-with-dark-icon-silhouettes-all-elements-should-have-sufficient-size-and-spacing-for-comfortable-touch-interaction-on-mobile-screens-the-overlay-must-be-pointer-events-none-on-its-container-except-on-the-interactive-joystick-and-button-elements-so-the-3d-canvas-remains-interactive-in-the-empty-space",
+      "title": "Style the TouchControls overlay using the existing Minecraft pixel-art theme (Press Start 2P font, earthy/blocky flat UI style, matching index.css design tokens). The joystick outer ring should be a dark semi-transparent circle; the thumb should be a white/light circle with a blue concentric dot and arrow indicators. The three action buttons should be large, circular, and colored yellow, green, and pink respectively, with dark icon silhouettes. All elements should have sufficient size and spacing for comfortable touch interaction on mobile screens. The overlay must be pointer-events-none on its container except on the interactive joystick and button elements, so the 3D canvas remains interactive in the empty space.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-creative-mode-block-placement-and-breaking-mechanics-in-village3dscene-players-must-be-able-to-left-click-to-break-remove-any-existing-terrain-or-placed-block-and-right-click-to-place-a-new-block-adjacent-to-the-face-they-clicked-on-the-block-inventory-is-infinite-creative-mode-supported-block-types-must-include-at-minimum-grass-dirt-stone-wood-log-and-leaf-selectable-via-a-hotbar-ui-placed-blocks-must-persist-in-local-react-state-for-the-session-and-be-rendered-as-voxel-box-meshes-consistent-with-the-existing-terrain-block-style",
+      "title": "Implement creative mode block placement and breaking mechanics in Village3DScene. Players must be able to left-click to break (remove) any existing terrain or placed block, and right-click to place a new block adjacent to the face they clicked on. The block inventory is infinite (creative mode). Supported block types must include at minimum: grass, dirt, stone, wood log, and leaf — selectable via a hotbar UI. Placed blocks must persist in local React state for the session and be rendered as voxel box meshes consistent with the existing Terrain block style.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-blockhotbar-component-frontend-src-components-blockhotbar-tsx-that-renders-a-fixed-bottom-center-hud-strip-showing-selectable-block-types-for-placement-it-must-display-at-least-5-slots-grass-dirt-stone-log-leaf-each-showing-a-small-colored-block-icon-and-a-number-key-hint-1-5-the-active-slot-must-be-highlighted-with-a-bright-border-the-hotbar-must-be-styled-with-the-minecraft-pixel-art-theme-matching-gamehud-tsx-press-start-2p-font-stone-earthy-colors-blocky-flat-ui-number-keys-1-5-on-the-keyboard-must-also-switch-the-selected-block-type",
+      "title": "Add a BlockHotbar component (frontend/src/components/BlockHotbar.tsx) that renders a fixed bottom-center HUD strip showing selectable block types for placement. It must display at least 5 slots (grass, dirt, stone, log, leaf), each showing a small colored block icon and a number key hint (1–5). The active slot must be highlighted with a bright border. The hotbar must be styled with the Minecraft pixel-art theme matching GameHUD.tsx (Press Start 2P font, stone/earthy colors, blocky flat UI). Number keys 1–5 on the keyboard must also switch the selected block type.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-passive-wandering-animal-components-cow-frontend-src-components-animals-cow-tsx-pig-frontend-src-components-animals-pig-tsx-and-chicken-frontend-src-components-animals-chicken-tsx-each-animal-must-be-rendered-as-a-blocky-voxel-3d-model-using-three-js-box-geometries-with-minecraft-inspired-colors-cow-black-and-white-body-pig-pink-body-chicken-white-body-with-red-comb-each-animal-must-wander-autonomously-within-the-village-terrain-bounds-moving-in-a-random-direction-for-a-random-duration-2-5-seconds-then-pausing-briefly-before-picking-a-new-direction-animals-must-not-walk-off-the-terrain-edges-and-must-stay-at-ground-level-y-0-5",
+      "title": "Create passive wandering animal components: Cow (frontend/src/components/animals/Cow.tsx), Pig (frontend/src/components/animals/Pig.tsx), and Chicken (frontend/src/components/animals/Chicken.tsx). Each animal must be rendered as a blocky voxel 3D model using Three.js box geometries with Minecraft-inspired colors (cow: black-and-white body; pig: pink body; chicken: white body with red comb). Each animal must wander autonomously within the village terrain bounds — moving in a random direction for a random duration (2–5 seconds), then pausing briefly before picking a new direction. Animals must not walk off the terrain edges and must stay at ground level (y = 0.5).",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-integrate-the-animal-components-cow-pig-chicken-into-village3dscene-tsx-spawn-at-least-2-cows-3-pigs-and-3-chickens-at-randomized-starting-positions-within-the-terrain-bounds-spread-across-the-village-animals-must-be-rendered-as-part-of-the-scene-alongside-terrain-houses-and-trees",
+      "title": "Integrate the animal components (Cow, Pig, Chicken) into Village3DScene.tsx. Spawn at least 2 cows, 3 pigs, and 3 chickens at randomized starting positions within the terrain bounds, spread across the village. Animals must be rendered as part of the scene alongside terrain, houses, and trees.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-gamehud-controls-hints-panel-in-gamehud-tsx-to-include-block-placement-hints-left-click-break-block-right-click-place-block-and-1-5-select-block-these-hints-must-appear-in-the-existing-controls-hints-panel-alongside-the-existing-movement-and-jump-hints-styled-consistently-with-the-minecraft-pixel-art-theme",
+      "title": "Update the GameHUD controls hints panel in GameHUD.tsx to include block placement hints: 'Left Click: Break Block', 'Right Click: Place Block', and '1-5: Select Block'. These hints must appear in the existing controls hints panel alongside the existing movement and jump hints, styled consistently with the Minecraft pixel-art theme.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-increase-the-visual-prominence-and-visibility-of-all-interactive-buttons-in-the-game-ui-including-the-mute-unmute-music-button-in-gamehud-tsx-the-touchcontrols-action-buttons-yellow-jump-green-music-pink-hints-and-the-blockhotbar-slot-buttons-buttons-must-have-clearly-legible-labels-icons-stronger-contrast-against-the-background-a-visible-border-or-raised-effect-and-a-hover-active-press-state-e-g-brightness-change-or-scale-all-styling-must-remain-consistent-with-the-existing-minecraft-pixel-art-theme-press-start-2p-font-earthy-blocky-flat-ui-stone-earthy-color-palette",
+      "title": "Increase the visual prominence and visibility of all interactive buttons in the game UI — including the mute/unmute music button in GameHUD.tsx, the TouchControls action buttons (yellow jump, green music, pink hints), and the BlockHotbar slot buttons. Buttons must have clearly legible labels/icons, stronger contrast against the background, a visible border or raised effect, and a hover/active press state (e.g., brightness change or scale). All styling must remain consistent with the existing Minecraft pixel-art theme (Press Start 2P font, earthy/blocky flat UI, stone/earthy color palette).",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
     {
       "id": "AR-1",
       "summary": "Blue bird character in a Minecraft-style village",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Display on-screen controls/instructions prominently on the game screen",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Add mobile touch controls overlay: virtual joystick (left) for movement, yellow jump button, green music toggle, pink hint toggle (right)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Add creative mode block placement and breaking mechanics (infinite blocks, place/break by clicking)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Add passive wandering animals (cows, pigs, chickens) to the village scene",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Make the UI buttons more prominent/visible (please buttons)",
       "reqIds": [],
       "status": "pending"
     }

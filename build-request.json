@@ -1,123 +1,41 @@
 {
   "kind": "build_request",
-  "title": "Minecraft-style village game with a blue bird character",
+  "title": "Make UI buttons more prominent and visible",
   "projectName": "Blue Bird Village",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-1",
-      "text": "Create a Minecraft-inspired 3D voxel-style village scene rendered with React Three Fiber. The village must include blocky terrain (grass, dirt, and stone blocks), at least 3 simple cubic-style houses with roofs, trees made of cube leaves and log trunks, and a sky background with a sun.",
+      "id": "REQ-16",
+      "text": "Increase the visual prominence and visibility of all interactive buttons in the game UI — including the mute/unmute music button in GameHUD.tsx, the TouchControls action buttons (yellow jump, green music, pink hints), and the BlockHotbar slot buttons. Buttons must have clearly legible labels/icons, stronger contrast against the background, a visible border or raised effect, and a hover/active press state (e.g., brightness change or scale). All styling must remain consistent with the existing Minecraft pixel-art theme (Press Start 2P font, earthy/blocky flat UI, stone/earthy color palette).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-2"
+          "msg-6"
         ],
         "quotes": [
-          "ther is a blue berd in a village (Minecraft)"
+          "Make please buttons"
         ]
       },
       "acceptanceCriteria": [
-        "A 3D scene renders with a flat blocky terrain using green and brown voxel blocks.",
-        "At least 3 Minecraft-style cubic houses are visible in the scene.",
-        "Trees with cube leaf clusters and cylindrical/cube trunks are present.",
-        "A sky background with a sun is visible."
-      ]
-    },
-    {
-      "id": "REQ-2",
-      "text": "Add a blue bird player character rendered as a simple blocky/voxel 3D model (using basic Three.js geometry — box for body, smaller boxes for wings and beak) colored bright blue. The bird must be controllable by the player using arrow keys or WASD to move left, right, forward, and backward across the village terrain, and Space to jump.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-2"
-        ],
-        "quotes": [
-          "ther is a blue berd in a village (Minecraft)"
-        ]
-      },
-      "acceptanceCriteria": [
-        "A blue blocky bird character is visible in the scene.",
-        "Pressing W/A/S/D or arrow keys moves the bird in the corresponding direction.",
-        "Pressing Space causes the bird to jump with a brief upward arc.",
-        "The bird stays on top of the terrain and does not fall through blocks."
-      ]
-    },
-    {
-      "id": "REQ-3",
-      "text": "Implement a third-person camera that follows the blue bird character smoothly as it moves around the village. The camera should maintain a fixed distance and angle behind and above the bird, rotating with the bird's movement direction.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-2"
-        ],
-        "quotes": [
-          "ther is a blue berd in a village (Minecraft)"
-        ]
-      },
-      "acceptanceCriteria": [
-        "The camera always follows behind and above the bird character.",
-        "Camera transitions are smooth and do not jerk abruptly.",
-        "The full village scene remains visible from the camera's vantage point."
-      ]
-    },
-    {
-      "id": "REQ-4",
-      "text": "Add simple Minecraft-style ambient village sounds or background music toggle (mute/unmute button on screen). Display a HUD overlay showing the player's current position coordinates and a simple on-screen control hints label (WASD to move, Space to jump).",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-2"
-        ],
-        "quotes": [
-          "ther is a blue berd in a village (Minecraft)"
-        ]
-      },
-      "acceptanceCriteria": [
-        "A mute/unmute button is displayed on screen.",
-        "A HUD shows the bird's X/Y/Z position updated in real time.",
-        "Control hints (WASD/Arrows to move, Space to jump) are displayed on screen."
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "text": "Apply a consistent Minecraft-inspired pixel-art visual theme across the entire UI: use a pixelated font (e.g., 'Press Start 2P' from Google Fonts), earthy and grassy color palette (greens, browns, sky blue, stone grey), and a blocky flat UI style for all overlays, buttons, and HUD elements.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-2"
-        ],
-        "quotes": [
-          "ther is a blue berd in a village (Minecraft)"
-        ]
-      },
-      "acceptanceCriteria": [
-        "All UI text uses a pixelated/8-bit style font.",
-        "Color palette is consistent with Minecraft's earthy tones and sky blue.",
-        "HUD and buttons have a blocky flat design with pixel-style borders."
+        "The mute/unmute button in GameHUD.tsx is clearly visible with a distinct border, background color, and sufficient padding.",
+        "The yellow, green, and pink action buttons in TouchControls.tsx are visually prominent with strong contrast and clearly distinguishable icons.",
+        "All hotbar slots in BlockHotbar.tsx have a visible button border and the active slot is highlighted with a bright distinct border.",
+        "All buttons display a hover state (e.g., brightness increase) and an active/pressed state (e.g., slight scale down or darker shade).",
+        "All button styles remain consistent with the Minecraft pixel-art theme (blocky, flat, Press Start 2P font where text is present)."
       ]
     }
   ],
   "constraints": [
-    "All 3D rendering must use React Three Fiber and Three.js only — no external game engines.",
-    "All logic must remain within the single frontend React application; no backend game state is needed.",
-    "Do not modify any files under frontend/src/hooks/ or frontend/src/components/ui."
+    "Do not modify any files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui.",
+    "All visual changes must remain consistent with the existing Minecraft pixel-art theme."
   ],
   "nonGoals": [
-    "Multiplayer or networked gameplay.",
-    "Procedurally generated infinite terrain.",
-    "Block-breaking or block-placing mechanics.",
-    "Inventory system or crafting.",
-    "Enemy NPCs or combat mechanics.",
-    "Backend persistence of game state."
+    "Adding new buttons or UI elements not already present.",
+    "Changing button functionality or wiring.",
+    "Modifying backend logic."
   ],
   "imageRequirements": {
-    "required": [
-      "Pixel-art style blue bird character sprite facing forward, blocky Minecraft aesthetic (blue-bird-sprite.dim_128x128.png)",
-      "Pixel-art Minecraft-style grass and dirt texture tile (grass-dirt-tile.dim_64x64.png)",
-      "Pixel-art Minecraft-style wooden plank texture tile for houses (wood-plank-tile.dim_64x64.png)",
-      "Pixel-art Minecraft-style stone brick texture tile (stone-brick-tile.dim_64x64.png)",
-      "Pixel-art Minecraft-style tree leaf texture tile, bright green (leaf-tile.dim_64x64.png)"
-    ],
+    "required": [],
     "edits": []
   }
 }

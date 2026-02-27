@@ -8,7 +8,14 @@ import Tree from './Tree';
 import Sky from './Sky';
 import FollowCamera from './FollowCamera';
 import GameHUD from './GameHUD';
+import TouchControls, { TouchMovement } from './TouchControls';
+import PlacedBlocks from './PlacedBlocks';
+import BlockHotbar from './BlockHotbar';
+import Cow from './animals/Cow';
+import Pig from './animals/Pig';
+import Chicken from './animals/Chicken';
 import { useAudio } from '../hooks/useAudio';
+import { useBlockPlacement, BlockType } from '../hooks/useBlockPlacement';
 
 function PathBlocks() {
   const pathPositions: [number, number, number][] = [];
@@ -38,13 +45,26 @@ function PathBlocks() {
   );
 }
 
+// Prevent browser context menu on right-click inside canvas
+function ContextMenuBlocker() {
+  return null;
+}
+
 function VillageContent({
   birdRef,
   onPositionChange,
+  touchMovementRef,
+  touchJumpRef,
+  selectedBlockType,
 }: {
   birdRef: React.RefObject<BlueBirdHandle | null>;
   onPositionChange: (pos: THREE.Vector3) => void;
+  touchMovementRef: React.RefObject<TouchMovement>;
+  touchJumpRef: React.RefObject<boolean>;
+  selectedBlockType: BlockType;
 }) {
+  const { blocks, handleBlockPointerDown, handleTerrainPointerDown } = useBlockPlacement(selectedBlockType);
+
   return (
     <>
       <Sky />
@@ -99,8 +119,26 @@ function VillageContent({
         <Tree position={[-13, 0, -8]} scale={1.15} />
       </Suspense>
 
+      {/* Animals */}
+      <Cow initialPosition={{ x: 5, z: 5 }} />
+      <Cow initialPosition={{ x: 20, z: 10 }} />
+      <Pig initialPosition={{ x: 8, z: 15 }} />
+      <Pig initialPosition={{ x: 18, z: 8 }} />
+      <Pig initialPosition={{ x: 12, z: 25 }} />
+      <Chicken initialPosition={{ x: 10, z: 20 }} />
+      <Chicken initialPosition={{ x: 22, z: 18 }} />
+      <Chicken initialPosition={{ x: 6, z: 12 }} />
+
+      {/* Placed blocks */}
+      <PlacedBlocks blocks={blocks} onPointerDown={handleBlockPointerDown} />
+
       {/* Blue Bird Player */}
-      <BlueBird ref={birdRef} onPositionChange={onPositionChange} />
+      <BlueBird
+        ref={birdRef}
+        onPositionChange={onPositionChange}
+        touchMovementRef={touchMovementRef}
+        touchJumpRef={touchJumpRef}
+      />
 
       {/* Follow Camera */}
       <FollowCamera target={birdRef} />
@@ -112,13 +150,48 @@ export default function Village3DScene() {
   const birdRef = useRef<BlueBirdHandle>(null);
   const [birdPosition, setBirdPosition] = useState(() => new THREE.Vector3(0, 0.5, 0));
   const { isMuted, toggleMute } = useAudio();
+  const [showHints, setShowHints] = useState(true);
+  const [selectedBlockType, setSelectedBlockType] = useState<BlockType>('grass');
+
+  // Touch input refs — updated by TouchControls, read by BlueBird in useFrame
+  const touchMovementRef = useRef<TouchMovement>({
+    forward: false,
+    backward: false,
+    left: false,
+    right: false,
+  });
+  const touchJumpRef = useRef<boolean>(false);
+  // Timer ref to auto-release the jump signal after one frame
+  const jumpTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handlePositionChange = useCallback((pos: THREE.Vector3) => {
     setBirdPosition(pos);
   }, []);
 
+  const handleTouchMove = useCallback((movement: TouchMovement) => {
+    touchMovementRef.current = movement;
+  }, []);
+
+  const handleTouchJump = useCallback(() => {
+    // Set jump signal for a short window so BlueBird's useFrame picks it up
+    touchJumpRef.current = true;
+    if (jumpTimerRef.current) clearTimeout(jumpTimerRef.current);
+    jumpTimerRef.current = setTimeout(() => {
+      touchJumpRef.current = false;
+    }, 150);
+  }, []);
+
+  const handleToggleHints = useCallback(() => {
+    setShowHints((prev) => !prev);
+  }, []);
+
+  // Prevent browser context menu on right-click inside the canvas
+  const handleContextMenu = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+  }, []);
+
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full" onContextMenu={handleContextMenu}>
       <Canvas
         shadows
         camera={{ position: [0, 6, 11], fov: 70, near: 0.1, far: 200 }}
@@ -130,11 +203,38 @@ export default function Village3DScene() {
         }}
       >
         <Suspense fallback={null}>
-          <VillageContent birdRef={birdRef} onPositionChange={handlePositionChange} />
+          <VillageContent
+            birdRef={birdRef}
+            onPositionChange={handlePositionChange}
+            touchMovementRef={touchMovementRef}
+            touchJumpRef={touchJumpRef}
+            selectedBlockType={selectedBlockType}
+          />
         </Suspense>
       </Canvas>
 
-      <GameHUD birdPosition={birdPosition} isMuted={isMuted} onToggleMute={toggleMute} />
+      {/* HUD overlay */}
+      <GameHUD
+        birdPosition={birdPosition}
+        isMuted={isMuted}
+        onToggleMute={toggleMute}
+        showHints={showHints}
+      />
+
+      {/* Block hotbar */}
+      <BlockHotbar
+        selectedBlockType={selectedBlockType}
+        onSelectBlockType={setSelectedBlockType}
+      />
+
+      {/* Touch controls overlay */}
+      <TouchControls
+        onMove={handleTouchMove}
+        onJump={handleTouchJump}
+        onToggleMusic={toggleMute}
+        onToggleHints={handleToggleHints}
+        isMuted={isMuted}
+      />
     </div>
   );
 }
