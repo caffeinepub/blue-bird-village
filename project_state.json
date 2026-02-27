@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "A Minecraft-style 2D/3D game featuring a blue bird character in a village setting.",
+  "architectural_notes": [
+    "Minecraft-inspired visual style (blocky/voxel aesthetic)"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Pixel-art style blue bird character sprite facing forward, blocky Minecraft aesthetic (blue-bird-sprite.dim_128x128.png)\n- Pixel-art Minecraft-style grass and dirt texture tile (grass-dirt-tile.dim_64x64.png)\n- Pixel-art Minecraft-style wooden plank texture tile for houses (wood-plank-tile.dim_64x64.png)\n- Pixel-art Minecraft-style stone brick texture tile (stone-brick-tile.dim_64x64.png)\n- Pixel-art Minecraft-style tree leaf texture tile, bright green (leaf-tile.dim_64x64.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-a-minecraft-inspired-3d-voxel-style-village-scene-rendered-with-react-three-fiber-the-village-must-include-blocky-terrain-grass-dirt-and-stone-blocks-at-least-3-simple-cubic-style-houses-with-roofs-trees-made-of-cube-leaves-and-log-trunks-and-a-sky-background-with-a-sun",
+      "title": "Create a Minecraft-inspired 3D voxel-style village scene rendered with React Three Fiber. The village must include blocky terrain (grass, dirt, and stone blocks), at least 3 simple cubic-style houses with roofs, trees made of cube leaves and log trunks, and a sky background with a sun.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-blue-bird-player-character-rendered-as-a-simple-blocky-voxel-3d-model-using-basic-three-js-geometry-box-for-body-smaller-boxes-for-wings-and-beak-colored-bright-blue-the-bird-must-be-controllable-by-the-player-using-arrow-keys-or-wasd-to-move-left-right-forward-and-backward-across-the-village-terrain-and-space-to-jump",
+      "title": "Add a blue bird player character rendered as a simple blocky/voxel 3D model (using basic Three.js geometry — box for body, smaller boxes for wings and beak) colored bright blue. The bird must be controllable by the player using arrow keys or WASD to move left, right, forward, and backward across the village terrain, and Space to jump.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-third-person-camera-that-follows-the-blue-bird-character-smoothly-as-it-moves-around-the-village-the-camera-should-maintain-a-fixed-distance-and-angle-behind-and-above-the-bird-rotating-with-the-bird-s-movement-direction",
+      "title": "Implement a third-person camera that follows the blue bird character smoothly as it moves around the village. The camera should maintain a fixed distance and angle behind and above the bird, rotating with the bird's movement direction.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-simple-minecraft-style-ambient-village-sounds-or-background-music-toggle-mute-unmute-button-on-screen-display-a-hud-overlay-showing-the-player-s-current-position-coordinates-and-a-simple-on-screen-control-hints-label-wasd-to-move-space-to-jump",
+      "title": "Add simple Minecraft-style ambient village sounds or background music toggle (mute/unmute button on screen). Display a HUD overlay showing the player's current position coordinates and a simple on-screen control hints label (WASD to move, Space to jump).",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-consistent-minecraft-inspired-pixel-art-visual-theme-across-the-entire-ui-use-a-pixelated-font-e-g-press-start-2p-from-google-fonts-earthy-and-grassy-color-palette-greens-browns-sky-blue-stone-grey-and-a-blocky-flat-ui-style-for-all-overlays-buttons-and-hud-elements",
+      "title": "Apply a consistent Minecraft-inspired pixel-art visual theme across the entire UI: use a pixelated font (e.g., 'Press Start 2P' from Google Fonts), earthy and grassy color palette (greens, browns, sky blue, stone grey), and a blocky flat UI style for all overlays, buttons, and HUD elements.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Blue bird character in a Minecraft-style village",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "3d",
+  "projectName": "Blue Bird Village",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

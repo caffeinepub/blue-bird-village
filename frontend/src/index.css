@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0px;
+
+    /* Minecraft-inspired palette */
+    --background: 0.35 0.08 220;
+    --foreground: 0.98 0 0;
+    --card: 0.22 0.02 220;
+    --card-foreground: 0.98 0 0;
+    --popover: 0.22 0.02 220;
+    --popover-foreground: 0.98 0 0;
+    --primary: 0.55 0.18 145;
+    --primary-foreground: 0.98 0 0;
+    --secondary: 0.45 0.08 60;
+    --secondary-foreground: 0.98 0 0;
+    --muted: 0.30 0.03 220;
+    --muted-foreground: 0.70 0.02 220;
+    --accent: 0.75 0.18 85;
+    --accent-foreground: 0.10 0 0;
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+    --border: 0.25 0.03 220;
+    --input: 0.25 0.03 220;
+    --ring: 0.55 0.18 145;
+
+    --chart-1: 0.55 0.18 145;
+    --chart-2: 0.65 0.18 60;
+    --chart-3: 0.55 0.18 220;
+    --chart-4: 0.75 0.18 85;
+    --chart-5: 0.55 0.22 25;
+
+    --sidebar: 0.22 0.02 220;
+    --sidebar-foreground: 0.98 0 0;
+    --sidebar-primary: 0.55 0.18 145;
+    --sidebar-primary-foreground: 0.98 0 0;
+    --sidebar-accent: 0.30 0.03 220;
+    --sidebar-accent-foreground: 0.98 0 0;
+    --sidebar-border: 0.25 0.03 220;
+    --sidebar-ring: 0.55 0.18 145;
+
+    /* Minecraft custom tokens */
+    --mc-grass: 0.55 0.18 145;
+    --mc-dirt: 0.45 0.12 60;
+    --mc-sky: 0.65 0.12 220;
+    --mc-stone: 0.55 0.02 220;
+    --mc-yellow: 0.85 0.18 90;
+    --mc-green: 0.60 0.20 145;
+    --mc-red: 0.55 0.22 25;
+    --mc-blue: 0.55 0.20 250;
+  }
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Press Start 2P', monospace;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+}
+
+@layer components {
+  .hud-panel {
+    background: rgba(0, 0, 0, 0.72);
+    border: 3px solid rgba(255, 255, 255, 0.18);
+    border-bottom-color: rgba(0, 0, 0, 0.5);
+    border-right-color: rgba(0, 0, 0, 0.5);
+    image-rendering: pixelated;
+    font-family: 'Press Start 2P', monospace;
+  }
+
+  .hud-button {
+    background: rgba(0, 0, 0, 0.72);
+    border: 3px solid rgba(255, 255, 255, 0.25);
+    border-bottom-color: rgba(0, 0, 0, 0.6);
+    border-right-color: rgba(0, 0, 0, 0.6);
+    font-family: 'Press Start 2P', monospace;
+    cursor: pointer;
+    transition: filter 0.1s;
+  }
+
+  .hud-button:hover {
+    filter: brightness(1.3);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .hud-button:active {
+    border-top-color: rgba(0, 0, 0, 0.6);
+    border-left-color: rgba(0, 0, 0, 0.6);
+    border-bottom-color: rgba(255, 255, 255, 0.25);
+    border-right-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .text-mc-yellow {
+    color: oklch(0.85 0.18 90);
+  }
+
+  .text-mc-green {
+    color: oklch(0.70 0.22 145);
+  }
+
+  .text-mc-red {
+    color: oklch(0.60 0.22 25);
+  }
+
+  .text-mc-sky {
+    color: oklch(0.65 0.12 220);
+  }
+}

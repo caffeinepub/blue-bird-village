@@ -1,0 +1,17 @@
+{
+  "frontend/src/App.tsx": "Root app component that renders the full-screen Village3DScene game.",
+  "frontend/src/index.css": "Global styles with Minecraft-inspired OKLCH color palette, Press Start 2P pixel font, and HUD panel/button component classes.",
+  "frontend/tailwind.config.js": "Tailwind config extended with pixel font family, Minecraft color tokens (mc-grass, mc-dirt, mc-sky, etc.), zero border-radius, and pixel shadow utilities.",
+  "frontend/src/hooks/useKeyboardControls.ts": "Custom hook that tracks WASD/arrow key and Space bar state via keydown/keyup events, preventing default scroll behavior.",
+  "frontend/src/hooks/useAudio.ts": "Custom hook managing Web Audio API ambient melody playback with mute/unmute toggle using sine oscillators.",
+  "frontend/src/hooks/useQueries.ts": "Placeholder file indicating no backend queries are needed for this purely local game.",
+  "frontend/src/components/Sky.tsx": "3D sky component with a blue sphere dome, blocky Minecraft-style sun with glow, and five cloud formations made of white boxes.",
+  "frontend/src/components/Terrain.tsx": "Instanced mesh terrain component rendering a 32×32 grid of grass-dirt textured voxel blocks using Three.js InstancedMesh for performance.",
+  "frontend/src/components/House.tsx": "Minecraft-style house component with stone foundation, wood-plank walls, dark red roof, door, and glass windows using loaded textures.",
+  "frontend/src/components/Tree.tsx": "Voxel tree component with a brown trunk and four layered green leaf clusters in a pyramid shape.",
+  "frontend/src/components/BlueBird.tsx": "Controllable blue bird player character built from BoxGeometry parts with WASD/arrow movement, Space jump, gravity, wing flap animation, and position callback.",
+  "frontend/src/components/FollowCamera.tsx": "Third-person follow camera that smoothly lerps behind and above the bird's position each frame using useFrame.",
+  "frontend/src/components/GameHUD.tsx": "Fixed overlay HUD displaying bird XYZ coordinates, mute/unmute button, control hints, crosshair, and footer attribution.",
+  "frontend/src/components/Village3DScene.tsx": "Main scene orchestrator rendering the Canvas with all village elements, managing bird position state, and composing the HUD overlay.",
+  "frontend/index.html": "HTML entry point with Press Start 2P Google Font preloaded and Blue Bird Village title."
+}

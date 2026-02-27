@@ -1,0 +1,144 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Minecraft-style village game with a blue bird character",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Create a Minecraft-inspired 3D voxel-style village scene with blocky terrain, houses, trees, and sky",
+      "acceptanceCriteria": [
+        "A 3D scene renders with a flat blocky terrain using green and brown voxel blocks.",
+        "At least 3 Minecraft-style cubic houses are visible in the scene.",
+        "Trees with cube leaf clusters and cylindrical/cube trunks are present.",
+        "A sky background with a sun is visible."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/package.json",
+          "operation": "modify",
+          "description": "Add dependencies: @react-three/fiber, @react-three/drei, three"
+        },
+        {
+          "path": "frontend/src/components/Village3DScene.tsx",
+          "operation": "create",
+          "description": "Create the main 3D scene component using React Three Fiber Canvas. Render blocky terrain (grass/dirt/stone voxel blocks), at least 3 cubic houses with roofs, trees with cube leaves and log trunks, and a sky with a sun. Use the generated textures from frontend/public/assets/generated/grass-dirt-tile.dim_64x64.png, frontend/public/assets/generated/wood-plank-tile.dim_64x64.png, frontend/public/assets/generated/stone-brick-tile.dim_64x64.png, and frontend/public/assets/generated/leaf-tile.dim_64x64.png as texture maps on the voxel meshes."
+        },
+        {
+          "path": "frontend/src/components/Terrain.tsx",
+          "operation": "create",
+          "description": "Create a Terrain component rendering a flat grid of voxel blocks (grass, dirt, stone) using Three.js BoxGeometry. Apply the grass-dirt-tile texture from frontend/public/assets/generated/grass-dirt-tile.dim_64x64.png."
+        },
+        {
+          "path": "frontend/src/components/House.tsx",
+          "operation": "create",
+          "description": "Create a House component rendering a simple cubic house structure with a roof using BoxGeometry. Apply wood-plank-tile texture from frontend/public/assets/generated/wood-plank-tile.dim_64x64.png and stone-brick-tile from frontend/public/assets/generated/stone-brick-tile.dim_64x64.png."
+        },
+        {
+          "path": "frontend/src/components/Tree.tsx",
+          "operation": "create",
+          "description": "Create a Tree component rendering a voxel tree with a trunk (brown boxes) and cube leaf clusters (green boxes). Apply leaf-tile texture from frontend/public/assets/generated/leaf-tile.dim_64x64.png to the leaves."
+        },
+        {
+          "path": "frontend/src/components/Sky.tsx",
+          "operation": "create",
+          "description": "Create a Sky component rendering a background sky gradient and a sun using a sphere or circle geometry with an emissive yellow material."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Add a blue bird player character controllable by keyboard (WASD/arrows and Space to jump)",
+      "acceptanceCriteria": [
+        "A blue blocky bird character is visible in the scene.",
+        "Pressing W/A/S/D or arrow keys moves the bird in the corresponding direction.",
+        "Pressing Space causes the bird to jump with a brief upward arc.",
+        "The bird stays on top of the terrain and does not fall through blocks."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/BlueBird.tsx",
+          "operation": "create",
+          "description": "Create a BlueBird component rendering a blocky voxel bird model using BoxGeometry (body, wings, beak) all colored bright blue. Optionally apply or overlay the blue-bird-sprite texture from frontend/public/assets/generated/blue-bird-sprite.dim_128x128.png as a decal or reference. Implement keyboard input handlers (W/A/S/D, arrow keys, Space) to update the bird's position (x, z movement, y jump with gravity simulation). Ensure collision detection keeps the bird on top of terrain blocks."
+        },
+        {
+          "path": "frontend/src/hooks/useKeyboardControls.ts",
+          "operation": "create",
+          "description": "Create a custom hook useKeyboardControls that listens to keydown/keyup events for W/A/S/D, arrow keys, and Space, returning the current input state (forward, backward, left, right, jump). This hook will be used by BlueBird component."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Implement a third-person camera that follows the blue bird character smoothly",
+      "acceptanceCriteria": [
+        "The camera always follows behind and above the bird character.",
+        "Camera transitions are smooth and do not jerk abruptly.",
+        "The full village scene remains visible from the camera's vantage point."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/FollowCamera.tsx",
+          "operation": "create",
+          "description": "Create a FollowCamera component that uses useFrame from @react-three/fiber to update the camera position and lookAt each frame. The camera should maintain a fixed offset behind and above the bird's current position, with smooth lerp transitions to avoid jerky movement."
+        },
+        {
+          "path": "frontend/src/components/Village3DScene.tsx",
+          "operation": "modify",
+          "description": "Integrate the FollowCamera component into the Canvas, passing the bird's position as a prop or using a ref to track the bird's location."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Add ambient sounds toggle and HUD displaying player position and control hints",
+      "acceptanceCriteria": [
+        "A mute/unmute button is displayed on screen.",
+        "A HUD shows the bird's X/Y/Z position updated in real time.",
+        "Control hints (WASD/Arrows to move, Space to jump) are displayed on screen."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/GameHUD.tsx",
+          "operation": "create",
+          "description": "Create a GameHUD component rendering a fixed overlay with: a mute/unmute button for background music, a live display of the bird's X/Y/Z coordinates (passed as props from BlueBird or via context), and control hints text ('WASD to move, Space to jump'). Style the HUD with blocky flat design matching the Minecraft aesthetic."
+        },
+        {
+          "path": "frontend/src/hooks/useAudio.ts",
+          "operation": "create",
+          "description": "Create a custom hook useAudio that manages background music playback using the Web Audio API or an HTML5 audio element, with play/pause toggle and mute state."
+        },
+        {
+          "path": "frontend/src/components/Village3DScene.tsx",
+          "operation": "modify",
+          "description": "Add the GameHUD component as an overlay outside the Canvas (or using Html from @react-three/drei inside Canvas). Pass the bird's position to the HUD and wire the mute/unmute button to the useAudio hook."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Apply a consistent Minecraft-inspired pixel-art visual theme across the entire UI",
+      "acceptanceCriteria": [
+        "All UI text uses a pixelated/8-bit style font.",
+        "Color palette is consistent with Minecraft's earthy tones and sky blue.",
+        "HUD and buttons have a blocky flat design with pixel-style borders."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Import 'Press Start 2P' font from Google Fonts and set it as the default font-family. Define CSS variables for Minecraft-inspired color palette (greens, browns, sky blue, stone grey). Apply blocky flat styles and pixel-style borders to buttons and HUD elements."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend the Tailwind theme to include the 'Press Start 2P' font family and custom color palette matching Minecraft's earthy tones (grass green, dirt brown, sky blue, stone grey). Add utility classes for blocky borders and pixel-art styling."
+        },
+        {
+          "path": "frontend/src/components/GameHUD.tsx",
+          "operation": "modify",
+          "description": "Apply Tailwind utility classes and custom CSS to ensure the HUD uses the pixelated font, earthy color palette, and blocky flat design with pixel-style borders."
+        }
+      ]
+    }
+  ]
+}
